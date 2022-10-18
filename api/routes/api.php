@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//Version 1 der joy-of-whitewater-api
+//api/v1
+Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\API\v1'], function(){
+    Route::apiResource('kurse', KursController::class);
+    Route::apiResource('status', StatusController::class);
+
+});
