@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BookSeeder::class,
             StatusSeeder::class,
-            KursSeeder::class
+            CourseSeeder::class
         ]);
     }
 }

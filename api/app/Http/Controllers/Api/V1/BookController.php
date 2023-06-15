@@ -48,7 +48,7 @@ class BookController extends Controller
      */
     public function show(book $book)
     {
-        //
+        return $book;
     }
 
     /**

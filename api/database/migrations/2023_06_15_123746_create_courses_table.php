@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kurs', function (Blueprint $table) {
+        Schema::create('courses', function (Blueprint $table) {
             $table->id();
-
-            $table->integer('status_id');  //Status Fremdschlüssel
+            $table->integer('status_id'); 
             $table->string('name');
             $table->string('beschreibung');
             $table->string('treffpunkt');
@@ -33,8 +32,7 @@ return new class extends Migration
             $table->integer('wirdAngezeigt');
             $table->string('paddelreise_gruppe')->nullable();  //Korsika, Piemont ...
             $table->integer('anzahl_pausentage')->nullable();
-            $table->dateTime('anmelde_schluss')->nullable();
-           
+            $table->dateTime('anmelde_schluss')->nullable(); 
             $table->timestamps();
         });
     }
@@ -46,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kurs');
+        Schema::dropIfExists('courses');
     }
 };

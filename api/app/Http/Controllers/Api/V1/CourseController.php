@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\StoreKursRequest;
-use App\Http\Requests\UpdateKursRequest;
-use App\Models\Kurs;
+use App\Http\Requests\StorecourseRequest;
+use App\Http\Requests\UpdatecourseRequest;
+use App\Models\course;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\CourseResource;
 
-class KursController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,7 @@ class KursController extends Controller
      */
     public function index()
     {
-        return Kurs::all();
+        return Course::all();
     }
 
     /**
@@ -32,32 +33,35 @@ class KursController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreKursRequest  $request
+     * @param  \App\Http\Requests\StorecourseRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreKursRequest $request)
+    public function store(StorecourseRequest $request)
     {
         //
     }
 
     /**
      * Display the specified resource.
+     * Also z.B. http://localhost:8888/api/v1/courses/1  -> liefert den Kurs mit der id=1
      *
-     * @param  \App\Models\Kurs  $kurs
+     * @param  \App\Models\course  $course
      * @return \Illuminate\Http\Response
      */
-    public function show(Kurs $kurs)
+    public function show(course $course)
     {
-        //
+        //nimmt jetzt die Resource und passt den Output entsprechend an
+        return new CourseResource($course);
+        //return $course;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Kurs  $kurs
+     * @param  \App\Models\course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kurs $kurs)
+    public function edit(course $course)
     {
         //
     }
@@ -65,11 +69,11 @@ class KursController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateKursRequest  $request
-     * @param  \App\Models\Kurs  $kurs
+     * @param  \App\Http\Requests\UpdatecourseRequest  $request
+     * @param  \App\Models\course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateKursRequest $request, Kurs $kurs)
+    public function update(UpdatecourseRequest $request, course $course)
     {
         //
     }
@@ -77,10 +81,10 @@ class KursController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Kurs  $kurs
+     * @param  \App\Models\course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kurs $kurs)
+    public function destroy(course $course)
     {
         //
     }

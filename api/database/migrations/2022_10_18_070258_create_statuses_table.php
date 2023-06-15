@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-
             $table->string('name');   //blue, green, yellow, red
             $table->string('text');
-
             $table->timestamps();
         });
     }

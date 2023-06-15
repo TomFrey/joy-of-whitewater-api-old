@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Kurs>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\course>
  */
-class KursFactory extends Factory
+class CourseFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,10 +19,10 @@ class KursFactory extends Factory
     {
         $status_id = $this->faker->numberBetween(1, 4);
         $name = $this->faker->randomElement(['Kajak Level 1 Kurs',
-                                             'Kanadier Level 2 Kurs',
-                                             'Kajak Level 5', 
-                                             'Packraft Level3-4 Kurs',
-                                             'Kanadier (Open Canoe) Level 3 Kurs']);
+                                            'Kanadier Level 2 Kurs',
+                                            'Kajak Level 5', 
+                                            'Packraft Level3-4 Kurs',
+                                            'Kanadier (Open Canoe) Level 3 Kurs']);
         $beschreibung = $this->faker->sentence();
         $preis_kurs = $this->faker->numberBetween(170, 600);
         $preis_material = $this->faker->numberBetween(50, 170);
@@ -51,7 +51,6 @@ class KursFactory extends Factory
             'paddelreise_gruppe' => NUll,
             'anzahl_pausentage' => NULL,
             'anmelde_schluss' => NULL
-
         ];
     }
 }
