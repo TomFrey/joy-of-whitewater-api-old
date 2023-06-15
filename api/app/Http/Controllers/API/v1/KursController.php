@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\v1;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\StoreKursRequest;
 use App\Http\Requests\UpdateKursRequest;

@@ -31,9 +31,9 @@ return new class extends Migration
             $table->string('typ');          //Paddelreise, Kanukurs, Eskimotieren, Packraft Kurs
             $table->string('guide');
             $table->integer('wirdAngezeigt');
-            $table->string('paddelreise_gruppe');  //Korsika, Piemont ...
-            $table->integer('anzahl_pausentage');
-            $table->dateTime('anmelde_schluss');
+            $table->string('paddelreise_gruppe')->nullable();  //Korsika, Piemont ...
+            $table->integer('anzahl_pausentage')->nullable();
+            $table->dateTime('anmelde_schluss')->nullable();
            
             $table->timestamps();
         });

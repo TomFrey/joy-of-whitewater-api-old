@@ -18,12 +18,12 @@ class StatusFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->ramdomElement(['blue', 'green', 'red', 'yellow']);
+        $name = $this->faker->unique()->randomElement(['blue', 'green', 'red', 'yellow']);
+        $text = $this->faker->sentence();
 
         return [
-            //
             'name' => $name,
-            'text' =>  'bla, bla, bla, bla, bla, bla, bla, bla, bla'
+            'text' => $text
         ];
     }
 }
