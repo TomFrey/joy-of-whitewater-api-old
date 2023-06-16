@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\StorecourseRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdatecourseRequest;
-use App\Models\course;
+use App\Models\Course;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\CourseResource;
+use App\Http\Resources\V1\CourseCollection;
+use App\Filters\V1\CourseFilter;
 
 class CourseController extends Controller
 {
@@ -15,9 +18,27 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Course::all();
+        //return Course::all();
+
+        //Benutzt die Collection, resp. die CourseResource
+        //return new CourseCollection(Course::all());
+
+        //Gibt die Collection innerhalb von Seiten zurück
+        //return new CourseCollection(Course::paginate());
+
+
+        $filter = new CourseFilter();
+        $queryItems = $filter->transform($request);  //[['column', 'operator', 'value']]
+
+        if(count($queryItems) == 0){
+            return new CourseCollection(Course::all());
+        } else {
+            return new CourseCollection(Course::where($queryItems)->get());
+            //return new CourseCollection(Course::where($queryItems)->paginate());
+        }
+
     }
 
     /**

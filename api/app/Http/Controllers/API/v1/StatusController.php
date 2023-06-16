@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\StoreStatusRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateStatusRequest;
 use App\Models\Status;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\StatusResource;
+use App\Http\Resources\V1\StatusCollection;
+use App\Filters\V1\StatusFilter;
+
 
 class StatusController extends Controller
 {
@@ -14,9 +19,21 @@ class StatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Status::all();
+
+        $filter = new StatusFilter();
+        $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]  z.B. 'name', '=', 'Jeff'
+
+        if(count($queryItems) == 0){
+            //return Status::all();
+            return new StatusCollection(Status::all());
+        } else {
+            return new StatusCollection(Status::where($queryItems)->get());
+        }
+
+
+        
     }
 
     /**
@@ -48,7 +65,8 @@ class StatusController extends Controller
      */
     public function show(Status $status)
     {
-        return $status;
+        //return $status;
+        return new StatusResource($status);
     }
 
     /**

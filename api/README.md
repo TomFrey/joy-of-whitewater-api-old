@@ -10,7 +10,21 @@ API mit Laravel
 - http://localhost:8888/api/v1/books
 - http://localhost:8888/api/v1/courses
 - http://localhost:8888/api/v1/courses/1 (Kurs mit id 1)
+
+
+- statusId = 4 
+
+http://localhost:8888/api/v1/courses?statusId[eq]=4
+- statusId != 4
+
+http://localhost:8888/api/v1/courses?statusId[ne]=4
+
+- name = Kajak Level 5
+
+http://localhost:8888/api/v1/courses?name[eq]=Kajak%20Level%205
+
 - http://localhost:8888/api/v1/status
+- http://localhost:8888/api/v1/status?name[eq]=green
 
 
 ## Fake Daten erstellen:
