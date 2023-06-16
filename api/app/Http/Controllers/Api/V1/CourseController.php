@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\StorecourseRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdatecourseRequest;
 use App\Models\Course;
@@ -10,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\CourseResource;
 use App\Http\Resources\V1\CourseCollection;
 use App\Filters\V1\CourseFilter;
+use App\Http\Requests\V1\StoreCourseRequest;
 
 class CourseController extends Controller
 {
@@ -46,10 +46,10 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -57,9 +57,9 @@ class CourseController extends Controller
      * @param  \App\Http\Requests\StorecourseRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorecourseRequest $request)
+    public function store(StoreCourseRequest $request)
     {
-        //
+        return new CourseResource(Course::create($request->all()));
     }
 
     /**
@@ -69,7 +69,7 @@ class CourseController extends Controller
      * @param  \App\Models\course  $course
      * @return \Illuminate\Http\Response
      */
-    public function show(course $course)
+    public function show(Course $course)
     {
         //nimmt jetzt die Resource und passt den Output entsprechend an
         return new CourseResource($course);
@@ -82,10 +82,10 @@ class CourseController extends Controller
      * @param  \App\Models\course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(course $course)
-    {
-        //
-    }
+    // public function edit(course $course)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -94,7 +94,7 @@ class CourseController extends Controller
      * @param  \App\Models\course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatecourseRequest $request, course $course)
+    public function update(UpdatecourseRequest $request, Course $course)
     {
         //
     }
