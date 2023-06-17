@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdatecourseRequest;
 use App\Models\Course;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\CourseResource;
 use App\Http\Resources\V1\CourseCollection;
 use App\Filters\V1\CourseFilter;
 use App\Http\Requests\V1\StoreCourseRequest;
+use App\Http\Requests\V1\UpdateCourseRequest;
 
 class CourseController extends Controller
 {
@@ -41,20 +41,12 @@ class CourseController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function create()
-    // {
-    //     //
-    // }
 
     /**
      * Store a newly created resource in storage.
+     * Behandelt die POST Requests.
      *
-     * @param  \App\Http\Requests\StorecourseRequest  $request
+     * @param  \App\Http\Requests\StoreCourseRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCourseRequest $request)
@@ -66,7 +58,7 @@ class CourseController extends Controller
      * Display the specified resource.
      * Also z.B. http://localhost:8888/api/v1/courses/1  -> liefert den Kurs mit der id=1
      *
-     * @param  \App\Models\course  $course
+     * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
     public function show(Course $course)
@@ -76,37 +68,31 @@ class CourseController extends Controller
         //return $course;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\course  $course
-     * @return \Illuminate\Http\Response
-     */
-    // public function edit(course $course)
-    // {
-    //     //
-    // }
 
     /**
      * Update the specified resource in storage.
+     * 
+     * Behandelt die PUT und PATCH Requests.
+     * PUT   -> alle Daten liefern
+     * PATCH -> nur die Daten liefern, die geändert werden müssen.
      *
-     * @param  \App\Http\Requests\UpdatecourseRequest  $request
-     * @param  \App\Models\course  $course
+     * @param  \App\Http\Requests\UpdateCourseRequest  $request
+     * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatecourseRequest $request, Course $course)
+    public function update(UpdateCourseRequest $request, Course $course)
     {
-        //
+        $course->update($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\course  $course
+     * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(course $course)
+    public function destroy(Course $course)
     {
-        //
+        Course::find($course->id)->delete();
     }
 }

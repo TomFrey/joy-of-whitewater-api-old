@@ -23,6 +23,9 @@ http://localhost:8888/api/v1/courses?statusId[ne]=4
 
 http://localhost:8888/api/v1/courses?name[eq]=Kajak%20Level%205
 
+- POST (Neuen Kurs erstellen)
+- http://localhost:8888/api/v1/courses
+
 - http://localhost:8888/api/v1/status
 - http://localhost:8888/api/v1/status?name[eq]=green
 
