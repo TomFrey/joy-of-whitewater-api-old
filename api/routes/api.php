@@ -20,9 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Version 1 der joy-of-whitewater-api
 //api/v1
-Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function(){
-   Route::apiResource('courses', CourseController::class);
-   Route::apiResource('status', StatusController::class);
-   Route::apiResource('books', BookController::class);
+Route::group(['prefix' => 'v1', 
+              'namespace' => 'App\Http\Controllers\Api\V1',
+              'middleware' => 'auth:sanctum'], 
+              function(){
+                Route::apiResource('courses', CourseController::class);
+                Route::apiResource('status', StatusController::class);
+                Route::apiResource('books', BookController::class);
 
-});
+            });

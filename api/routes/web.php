@@ -16,3 +16,36 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/setup', function(){
+    $credentials = [
+        'email' => 'joe@mitlinxlernen.ch',
+        'password' => 'irgendwas, was ich dann hashe'
+    ];
+
+    if(!Auth::attempt($credentials)){
+        $user = new App\Models\User();
+
+        $user->name = 'admin';
+        $user->email = $credentials['email'];
+        $user->password = Hash::make($credentials['password']);
+
+        $user->save();
+
+        if(Auth::attempt($credentials)){
+            $user = Auth::user();
+
+            $adminToken = $user->createToken('admin-token', ['create', 'update', 'delete']);
+            $updateToken = $user->createToken('update-token', ['create', 'update']);
+            //ACHTUNG: ohne Fähigkeiten Array, hat das Basictoken alle Rechte
+            //muss in der DB von Hand geändert werden.
+            $basicToken = $user->createToken('basic-token');
+
+            return [
+                'admin' => $adminToken->plainTextToken,
+                'update' => $updateToken->plainTextToken,
+                'basic' => $basicToken->plainTextToken
+            ];
+        }
+    }
+});
