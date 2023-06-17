@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreStatusRequest extends FormRequest
 {
@@ -13,7 +14,8 @@ class StoreStatusRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        $user = $this->user();
+        return $user != null && $user->tokenCan('create');
     }
 
     /**
@@ -24,7 +26,8 @@ class StoreStatusRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required'],
+            'text' => ['required']
         ];
     }
 }

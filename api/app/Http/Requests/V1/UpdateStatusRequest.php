@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateStatusRequest extends FormRequest
 {
@@ -13,7 +14,8 @@ class UpdateStatusRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        $user = $this->user();
+        return $user != null && $user->tokenCan('update');
     }
 
     /**
@@ -23,8 +25,21 @@ class UpdateStatusRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        
+        $method = $this->method();
+        if ($method == 'PUT'){
+            return [
+                'name' => ['required'],
+                'text' => ['required']
+               
+            ];
+        } 
+        // ist ein PATCH Request
+        else {
+            return [
+                'name' => ['sometimes', 'required'],
+                'text' => ['sometimes', 'required']
+            ];
+        }
     }
 }

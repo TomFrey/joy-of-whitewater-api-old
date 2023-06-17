@@ -9,6 +9,11 @@ class Status extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'text'
+    ];
+
     public function kurse(){
         return $this->belongsToMany(Kurs::class);
     }

@@ -26,6 +26,4 @@ Route::group(['prefix' => 'v1',
               function(){
                 Route::apiResource('courses', CourseController::class);
                 Route::apiResource('status', StatusController::class);
-                Route::apiResource('books', BookController::class);
-
             });
